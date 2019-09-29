@@ -1,0 +1,15 @@
+.nav.navbar-nav li a {
+    color: #212121;
+    
+
+}
+
+.seleccionar:hover{
+    color: #212121;
+    background: #e0f7fa;
+}
+
+h1{
+	text-align: center;
+	color: #212121;
+}
