@@ -1,0 +1,7 @@
+# Requirements
+Python
+# Flask
+# Selenium
+
+#html
+#bootstrap
