@@ -48,30 +48,36 @@ row = block.find_element_by_css_selector("div.row")
 listado = row.find_element_by_css_selector("div.col-sm-9")
 time.sleep(3)
 listaElementos = listado.find_element_by_id('listado_bloque_productos')
-titulosElementos = listaElementos.find_elements_by_css_selector('div.col-sm-4')
+titulosElementos = listaElementos.find_elements_by_xpath('//div[@class="col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding "]')
 #titulosElementos = listaElementos.find_elements_by_xpath("//div[@class='col-xs-6 col-sm-4']")
 nombres = {}
 id = 1
-for i in titulosElementos:
-    #i = titulosElementos[0]
-    contenedorNombre = i.find_element_by_css_selector("div.border_gray")
-    contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
-    divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
-    divImagen = divNombre.find_element_by_class_name("col-xs-12")
-    conNombre = divNombre.find_element_by_class_name("col-xs-12")
-    divImagen = divImagen.find_element_by_xpath("//div[div/@class='col-xs-12 list-product-price-p3']")
-    aImagen = divImagen.find_element_by_tag_name('span')
-    nombre = divNombre.find_element_by_tag_name("h5")
-    #imagen = aImagen.find_element_by_class_name('foto_producto_bloque')
+#for i in titulosElementos:
+i = titulosElementos[10]
+contenedorNombre = i.find_element_by_css_selector("div.border_gray")
+contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
+divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
+divImagen = divNombre.find_element_by_class_name("col-xs-12")
+conNombre = divNombre.find_element_by_class_name("col-xs-12")
+aImagen = divImagen.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
+aImagen1 = aImagen.find_element_by_xpath("//div[@class='col-xs-12']")
+aImagen2 = aImagen1.find_element_by_xpath("//div[@class='row']")
+imagenHTML= aImagen2.find_elements_by_xpath("//img")
 
-    nombres[id] = {"nombre":nombre.text,
-                            "Precio": divImagen.text
+aImagen3 = aImagen2.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
+imagen = aImagen3.find_element_by_tag_name('span')
+nombre = divNombre.find_element_by_tag_name("h5")
+#imagen = aImagen.find_element_by_class_name('foto_producto_bloque')
 
-    }
-    id += 1
-    #print(nombre.text)
+nombres[id] = {"nombre":nombre.text,
+                        "Precio": imagen.text
 
+}
+id += 1
 print(nombres)
+print(imagenHTML[1].get_property("src"))
+print("__________")
+print(aImagen3.text)
 
 driver.quit()    
 """

@@ -5,3 +5,28 @@ Python
 
 #html
 #bootstrap
+
+mysql ip 192.168.100.12
+
+if an error occur when: localhost/phpmyadmin
+
+
+The requested URL was not found on this server.
+
+Try:
+sudo -H gedit /etc/apache2/apache2.conf
+Then add the following line to the end of the file:
+
+Include /etc/phpmyadmin/apache.conf
+Then restart apache:
+
+/etc/init.d/apache2 restart
+
+
+if "Warning in ./libraries/plugin_interface.lib.php#551 count(): Parameter must be an array or an object that implements Countable"
+In
+sudo -H gedit /usr/share/phpmyadmin/libraries/plugin_interface.lib.php
+Replace:
+if ($options != null && count($options) > 0) {
+With:
+if ($options != null && count((array)$options) > 0) {
