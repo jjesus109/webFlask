@@ -37,7 +37,7 @@ email = formGroup.find_element_by_xpath("//input[@id='email']")
 password = formGroup.find_element_by_xpath("//input[@id='password']")
 time.sleep(2)
 email.send_keys("104590314")
-password.send_keys("1eec5")
+password.send_keys("")
 boton.click()
 time.sleep(3)
 
@@ -52,25 +52,25 @@ titulosElementos = listaElementos.find_elements_by_xpath('//div[@class="col-xs-6
 #titulosElementos = listaElementos.find_elements_by_xpath("//div[@class='col-xs-6 col-sm-4']")
 nombres = {}
 id = 1
-for i in titulosElementos:
-#i = titulosElementos[1]
-    contenedorNombre = i.find_element_by_css_selector("div.border_gray")
-    contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
-    divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
-    conNombre = divNombre.find_element_by_class_name("col-xs-12")
-    divImagen = divNombre.find_element_by_class_name("col-xs-12")
+#for i in titulosElementos:
+i = titulosElementos[1]
+contenedorNombre = i.find_element_by_css_selector("div.border_gray")
+contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
+divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
+conNombre = divNombre.find_element_by_class_name("col-xs-12")
+divImagen = divNombre.find_element_by_class_name("col-xs-12")
 
-    contPrecio = contenedorNombre.find_element_by_xpath("//div[@class='hidden-xs']")
-    rowPrecio = contPrecio.find_element_by_xpath("//div[@class='row']")
-    precio = rowPrecio.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
-    #precio = precio.find_element_by_tag_name("p")
-    #print(precio.get_attribute('innerHTML'))
-    nombre = divNombre.find_element_by_tag_name("h5")
-    nombres[id] = {"nombre":nombre.text,
-                        "Precio": 10.0
-    
-    }
-    id += 1
+contPrecio = contenedorNombre.find_element_by_xpath("//div[@class='hidden-xs']")
+rowPrecio = contPrecio.find_element_by_xpath("//div[@class='row']")
+precio = rowPrecio.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
+#precio = precio.find_element_by_tag_name("p")
+#print(precio.get_attribute('innerHTML'))
+nombre = divNombre.find_element_by_tag_name("h5")
+nombres[id] = {"nombre":nombre.text,
+                    "Precio": 10.0
+
+}
+id += 1
 """
 aImagen = divImagen.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
 aImagen1 = aImagen.find_element_by_xpath("//div[@class='col-xs-12']")
@@ -114,6 +114,8 @@ print(label_countdown.text)
 #print(productName)
 
 """INSERT DATA IN DATABASE"""
+
+"""
 print("data Obtain")
 print("this is the data")
 print(nombres)
@@ -133,7 +135,7 @@ try:
         if len(nombre1)>=29:
             nombre1 = nombre1[:28]
         precio1 = dicActual["Precio"]
-        primerquery = "INSERT INTO products(categoria,idDescripcion) values('camaras','"+str(i)+"')"
+        primerquery = "INSERT INTO products(categoria,idDescripcion) values('camara bala','"+str(i)+"')"
         segundoquery = "INSERT INTO detallesProductos(Nombre,costo) values('"+nombre1+"',"+str(precio1)+")"
         print(primerquery)
         print(segundoquery)
@@ -143,3 +145,5 @@ try:
     connection.commit()
 finally:
     connection.close()
+
+"""
