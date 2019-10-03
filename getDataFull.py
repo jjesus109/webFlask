@@ -39,7 +39,7 @@ time.sleep(2)
 email.send_keys("104590314")
 password.send_keys("1eec5")
 boton.click()
-time.sleep(4)
+time.sleep(3)
 
 
 titles_element = driver.find_element_by_css_selector("main.main_layout")
@@ -52,13 +52,26 @@ titulosElementos = listaElementos.find_elements_by_xpath('//div[@class="col-xs-6
 #titulosElementos = listaElementos.find_elements_by_xpath("//div[@class='col-xs-6 col-sm-4']")
 nombres = {}
 id = 1
-#for i in titulosElementos:
-i = titulosElementos[10]
-contenedorNombre = i.find_element_by_css_selector("div.border_gray")
-contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
-divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
-divImagen = divNombre.find_element_by_class_name("col-xs-12")
-conNombre = divNombre.find_element_by_class_name("col-xs-12")
+for i in titulosElementos:
+#i = titulosElementos[1]
+    contenedorNombre = i.find_element_by_css_selector("div.border_gray")
+    contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
+    divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
+    conNombre = divNombre.find_element_by_class_name("col-xs-12")
+    divImagen = divNombre.find_element_by_class_name("col-xs-12")
+
+    contPrecio = contenedorNombre.find_element_by_xpath("//div[@class='hidden-xs']")
+    rowPrecio = contPrecio.find_element_by_xpath("//div[@class='row']")
+    precio = rowPrecio.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
+    #precio = precio.find_element_by_tag_name("p")
+    #print(precio.get_attribute('innerHTML'))
+    nombre = divNombre.find_element_by_tag_name("h5")
+    nombres[id] = {"nombre":nombre.text,
+                        "Precio": 10.0
+    
+    }
+    id += 1
+"""
 aImagen = divImagen.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
 aImagen1 = aImagen.find_element_by_xpath("//div[@class='col-xs-12']")
 aImagen2 = aImagen1.find_element_by_xpath("//div[@class='row']")
@@ -66,18 +79,11 @@ imagenHTML= aImagen2.find_elements_by_xpath("//img")
 
 aImagen3 = aImagen2.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
 imagen = aImagen3.find_element_by_tag_name('span')
-nombre = divNombre.find_element_by_tag_name("h5")
+"""
+
 #imagen = aImagen.find_element_by_class_name('foto_producto_bloque')
 
-nombres[id] = {"nombre":nombre.text,
-                        "Precio": imagen.text
 
-}
-id += 1
-print(nombres)
-print(imagenHTML[1].get_property("src"))
-print("__________")
-print(aImagen3.text)
 
 driver.quit()    
 """
@@ -106,3 +112,34 @@ print(label_countdown.text)
 #elements  =bloqueProductos.find_all(class_='col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding')
 #productName = elements.find(class_='list-product-title ellipsis-multiline')
 #print(productName)
+
+"""INSERT DATA IN DATABASE"""
+print("data Obtain")
+print("this is the data")
+print(nombres)
+import pymysql
+host = "localhost"
+user = "admin"
+password = "1029"
+db = "dataP"
+connection  = pymysql.connect(host=host, user=user, password=password,
+                             db=db, cursorclass=pymysql.cursors.DictCursor)
+id = 1
+try:
+    cursor = connection.cursor()
+    for i in nombres:
+        dicActual = nombres[i]
+        nombre1 = dicActual["nombre"]
+        if len(nombre1)>=29:
+            nombre1 = nombre1[:28]
+        precio1 = dicActual["Precio"]
+        primerquery = "INSERT INTO products(categoria,idDescripcion) values('camaras','"+str(i)+"')"
+        segundoquery = "INSERT INTO detallesProductos(Nombre,costo) values('"+nombre1+"',"+str(precio1)+")"
+        print(primerquery)
+        print(segundoquery)
+        cursor.execute(primerquery)
+        cursor.execute(segundoquery)
+        id += 1
+    connection.commit()
+finally:
+    connection.close()
