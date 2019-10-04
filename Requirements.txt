@@ -6,6 +6,13 @@ Python
 #html
 #bootstrap
 
+
+First
+-- mysql -u admin - p < ./DB/DateBaseCreation.sql
+give password
+execute getDataFull.py on root
+
+#ERRORS SECTION
 mysql ip 192.168.100.12
 
 if an error occur when: localhost/phpmyadmin

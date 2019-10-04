@@ -14,16 +14,7 @@ loginA = containerLog.find_element_by_css_selector("li")
 loginI = loginA.find_element_by_css_selector("a")
 login = loginI.find_element_by_css_selector("i")
 containerLog.click()
-#containerLog = container.find_elements_by_xpath("ul[@class='nav']")
 
-
-#login = containerLog[0].find_element_by_xpath["//li[a/@href='/login']"]
-#login2 = containerLog[0].find_element_by_xpath["//li[a/@href='/login']"]
-
-#login = containerLog.find_element_by_xpath["//li"]
-
-#container2 = main[1].find_elements_by_xpath("//div[@class='collapse']")
-# Para rellenar datos de usuario
 
 main = driver.find_element_by_css_selector("main.main_layout")
 containerFluid = main.find_element_by_css_selector("div.container-fluid")
@@ -36,11 +27,11 @@ boton = form.find_element_by_xpath("//button[@id='login_btn']")
 email = formGroup.find_element_by_xpath("//input[@id='email']")
 password = formGroup.find_element_by_xpath("//input[@id='password']")
 time.sleep(2)
-email.send_keys("104590314")
+email.send_keys("")
 password.send_keys("")
 boton.click()
 time.sleep(3)
-
+# Comienza extraccion de datos de camaras bala
 
 titles_element = driver.find_element_by_css_selector("main.main_layout")
 block = titles_element.find_element_by_css_selector("div.container-fluid")
@@ -48,77 +39,42 @@ row = block.find_element_by_css_selector("div.row")
 listado = row.find_element_by_css_selector("div.col-sm-9")
 time.sleep(3)
 listaElementos = listado.find_element_by_id('listado_bloque_productos')
-titulosElementos = listaElementos.find_elements_by_xpath('//div[@class="col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding "]')
-#titulosElementos = listaElementos.find_elements_by_xpath("//div[@class='col-xs-6 col-sm-4']")
+titulosElementos = listaElementos.find_elements_by_xpath('.//div[@class="col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding "]')
+print(len(titulosElementos))
 nombres = {}
 id = 1
-#for i in titulosElementos:
-i = titulosElementos[1]
-contenedorNombre = i.find_element_by_css_selector("div.border_gray")
-contenedorPrecio = i.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
-divNombre = contenedorNombre.find_element_by_css_selector("div.default_padding_bottom")
-conNombre = divNombre.find_element_by_class_name("col-xs-12")
-divImagen = divNombre.find_element_by_class_name("col-xs-12")
+for i in titulosElementos:
+    #i = titulosElementos[2]
+    # Poner punto para declarar ruta relativa al elemento
+    contenedorNombre = i.find_element_by_xpath(".//div[@class='border_gray default_padding_top_bottom altura_bloque']")
+    divNombre = contenedorNombre.find_element_by_xpath(".//div[@class='row default_padding_bottom']")
+    conNombre = divNombre.find_element_by_class_name("col-xs-12")
+    nombre = divNombre.find_element_by_tag_name("h5")
+    #contenedorPrecio = i.find_element_by_xpath(".//div[@class='border_gray default_padding_top_bottom altura_bloque']")
+    contPrecio = contenedorNombre.find_element_by_xpath(".//div[@class='hidden-xs']")
+    precio = contPrecio.find_element_by_xpath(".//div[div/@class='col-xs-12 list-product-price-p3']")
 
-contPrecio = contenedorNombre.find_element_by_xpath("//div[@class='hidden-xs']")
-rowPrecio = contPrecio.find_element_by_xpath("//div[@class='row']")
-precio = rowPrecio.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
-#precio = precio.find_element_by_tag_name("p")
-#print(precio.get_attribute('innerHTML'))
-nombre = divNombre.find_element_by_tag_name("h5")
-nombres[id] = {"nombre":nombre.text,
-                    "Precio": 10.0
+    imagen =  contenedorNombre.find_element_by_xpath(".//div[div/@class='col-xs-12 text-center']")
+    imagen =  imagen.find_element_by_xpath(".//a")
+    imagen =  imagen.find_element_by_xpath(".//img")
+    linkImagen = imagen.get_property('src')
+    print("el HTML de imagen: " + linkImagen)
+    print(len(linkImagen))
+    precioFinal  = precio.text
+    precioFinal = precioFinal[4:-9]
+    print("El precio:__" + precioFinal +"___")
+    nombres[id] = {"nombre":nombre.text,
+                        "precio": precioFinal,
+                        "imagen": linkImagen
 
-}
-id += 1
-"""
-aImagen = divImagen.find_element_by_xpath("//div[@class='row precios-movil visible-xs-block']")
-aImagen1 = aImagen.find_element_by_xpath("//div[@class='col-xs-12']")
-aImagen2 = aImagen1.find_element_by_xpath("//div[@class='row']")
-imagenHTML= aImagen2.find_elements_by_xpath("//img")
-
-aImagen3 = aImagen2.find_element_by_xpath("//div[@class='col-xs-12 list-product-price-p3']")
-imagen = aImagen3.find_element_by_tag_name('span')
-"""
-
-#imagen = aImagen.find_element_by_class_name('foto_producto_bloque')
-
-
+    }
+    id += 1
+    print(nombre.text)
 
 driver.quit()    
-"""
 
-nombres = []
-for i in titulosElementos:
-    titulo = i.find_element_by_class_name('border_gray')
-    contenedorNombre = titulo.find_element_by_class_name("default_padding_bottom")
-    divNombre = Contenedornombre.find_element_by_class_name("col-xs-12")
-    nombre = divNombre.find_element_by_tag_name("h5")
-    print(nombre.getProperty(data-original-title))
-    nombres.append(nombre.getProperty(data-original-title))
-print(nombres)
-"""
-#for i in titulosElementos:
-#    print(i.text)
 
-    
-'''label_title = driver.find_element_by_class_name("col-sm-9 col-md-10 col-lg-11 area-de-listados")
-label_countdown = driver.find_element_by_class_name("col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding ")
-print(label_title.text)
-print(label_countdown.text)
-'''
-#print(titles)
-
-#elements  =bloqueProductos.find_all(class_='col-xs-6 col-sm-4 col-md-3 col-lg-2 no_padding')
-#productName = elements.find(class_='list-product-title ellipsis-multiline')
-#print(productName)
-
-"""INSERT DATA IN DATABASE"""
-
-"""
-print("data Obtain")
-print("this is the data")
-print(nombres)
+#****INSERT DATA IN DATABASE***
 import pymysql
 host = "localhost"
 user = "admin"
@@ -132,11 +88,12 @@ try:
     for i in nombres:
         dicActual = nombres[i]
         nombre1 = dicActual["nombre"]
-        if len(nombre1)>=29:
-            nombre1 = nombre1[:28]
-        precio1 = dicActual["Precio"]
+        if len(nombre1)>=99:
+            nombre1 = nombre1[:98]
+        precio1 = dicActual["precio"]
+        urlImagen = dicActual["imagen"]
         primerquery = "INSERT INTO products(categoria,idDescripcion) values('camara bala','"+str(i)+"')"
-        segundoquery = "INSERT INTO detallesProductos(Nombre,costo) values('"+nombre1+"',"+str(precio1)+")"
+        segundoquery = "INSERT INTO detallesProductos(Nombre,costo,linkImagen) values('"  +nombre1+"','"+str(precio1)+"','"+urlImagen+"')"
         print(primerquery)
         print(segundoquery)
         cursor.execute(primerquery)
@@ -145,5 +102,3 @@ try:
     connection.commit()
 finally:
     connection.close()
-
-"""
