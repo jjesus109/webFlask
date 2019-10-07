@@ -24,6 +24,10 @@ if __name__ == '__main__':
 
 from flask import Flask,render_template, redirect, url_for
 app = Flask(__name__)
+
+
+
+
 # This variable acts as I have a json
 myPosts = [
   {
@@ -44,6 +48,15 @@ myPosts = [
 @app.route("/home")
 def home():
    return render_template('home.html', posts = myPosts)
+from getDB import getFromDB
+
+@app.route("/products")
+def products():
+  peticion = ["SELECT * from detallesProductos dP INNER JOIN products p ON dP.idProducto=p.idProducto"]
+  results = getFromDB(peticion)
+  return render_template('products.html', posts = results[0], title = 'Products')
+
+
 
 @app.route("/about")
 def about():

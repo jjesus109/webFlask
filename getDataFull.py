@@ -27,8 +27,8 @@ boton = form.find_element_by_xpath("//button[@id='login_btn']")
 email = formGroup.find_element_by_xpath("//input[@id='email']")
 password = formGroup.find_element_by_xpath("//input[@id='password']")
 time.sleep(2)
-email.send_keys("")
-password.send_keys("")
+email.send_keys("104590314")
+password.send_keys("1eec5")
 boton.click()
 time.sleep(3)
 # Comienza extraccion de datos de camaras bala
@@ -99,6 +99,7 @@ try:
         cursor.execute(primerquery)
         cursor.execute(segundoquery)
         id += 1
+    # It must commit before execute querys, because is not autocommit
     connection.commit()
 finally:
     connection.close()

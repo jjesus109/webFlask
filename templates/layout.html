@@ -8,50 +8,72 @@ THIS I S THE LAYOUT FOR ALL THE PAGES THAT WILL USE THIS WEBSITE
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% if title%}
-       <title>Home page - {{title}}</title>
+       <title>Secats - {{title}}</title>
     {% else %}
-        <title>Home page</title>
+        <title>Secats</title>
     {% endif%}
 
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 </head>
 <body>
     <div class="container-fluid">
       <h1>SECATS</h1>
     </div>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
-      <!-- Brand -->
-      <a class="navbar-brand" href="#">Logo</a>
+    <!--INICIA NAVBAR-->
+      <div class="navbar-fixed">
+        <nav class="blue">
+          <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">Mi Logo</a>
+            <a href="#" data-target="#mobile-demo" class="sidenav-trigger">
+              <i class="material-icons">menu</i></a>
 
-      <!-- Links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link 1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link 2</a>
-        </li>
-
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Dropdown link
-          </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Link 1</a>
-            <a class="dropdown-item" href="#">Link 2</a>
-            <a class="dropdown-item" href="#">Link 3</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="#">One Item</a></li>
+              <li><a href="#">One Item</a></li>
+              <li><a href="#">One Item</a></li>
+              <li>
+                <a href="#!" class="dropdown-trigger"  data-activates="#dropdown1">Dropdown
+                  <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <ul id="dropdown1" class="dropdown-content" tabindex="0">
+                  <li><a href="#">one</a></li>
+                  <li><a href="#">two</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">three</a></li>
+                </ul>
+              </li>
+            </ul>
           </div>
-        </li>
-      </ul>
-    </nav>
 
+        </nav>
+      </div>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="#">One Item</a></li>
+        <li><a href="#">One Item</a></li>
+        <li><a href="#">One Item</a></li>
+        <li>
+          <a href="#" class="dropdown-trigger"  data-target="dropdown1">Dropdown
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#">one</a></li>
+            <li><a href="#">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#">three</a></li>
+          </ul>
+      </ul>
+    <!--FINALIZA NAVBAR-->
     <div class="container">
     {% block content %}{% endblock %}
     </div>
+      <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
 </body>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

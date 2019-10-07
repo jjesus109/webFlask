@@ -4,11 +4,10 @@
     use the layout for the rest of the html document
 -->
 {% block content %}
-	<h1>My home page my friends!</h1>
-	{% for post in posts%}
-        <h1>{{post.title}}</h1>
-        <p>By {{post.author}} on {{post.date_posted}}</p>
-        <p>{{post.content}}</p>
-    {%endfor%}
+	<h1>SECATS</h1>
+    <h2>Servicios</h2>  
+    <p>Aqui se despliega todo los servicios que manejaremos</p>
+    <h2>Productos</h2>
+    <p>Aqui se despliega todo los productos que manejaremos</   p>
 
 {% endblock content %}

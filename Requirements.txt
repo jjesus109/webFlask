@@ -10,7 +10,8 @@ Python
 First
 -- mysql -u admin - p < ./DB/DateBaseCreation.sql
 give password
-execute getDataFull.py on root
+run getDataFull.py on root
+run flaskBlog.py
 
 #ERRORS SECTION
 mysql ip 192.168.100.12
