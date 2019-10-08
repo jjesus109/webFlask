@@ -12,73 +12,122 @@ THIS I S THE LAYOUT FOR ALL THE PAGES THAT WILL USE THIS WEBSITE
     {% else %}
         <title>Secats</title>
     {% endif%}
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <!--<link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>-->
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}">
 
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
     <div class="container-fluid">
       <h1>SECATS</h1>
     </div>
     <!--INICIA NAVBAR-->
+        <ul id="dropdown2" class="dropdown-content" >
+            <li><a href="#">one</a></li>
+            <li><a href="#">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#">three</a></li>
+        </ul>
+
+        <ul id="dropdown1" class="dropdown-content" >
+                <li><a href="#">one</a></li>
+                <li><a href="#">two</a></li>
+                <li class="divider"></li>
+                <li><a href="#">three</a></li>
+            </ul>
       <div class="navbar-fixed">
         <nav class="blue">
           <div class="nav-wrapper container">
             <a href="#" class="brand-logo">Mi Logo</a>
-            <a href="#" data-target="#mobile-demo" class="sidenav-trigger">
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger">
               <i class="material-icons">menu</i></a>
-
+            
             <ul class="right hide-on-med-and-down">
-              <li><a href="#">One Item</a></li>
-              <li><a href="#">One Item</a></li>
-              <li><a href="#">One Item</a></li>
+              <li><a href="./">Home</a></li>
+              <li><a href="./about">About</a></li>
               <li>
-                <a href="#!" class="dropdown-trigger"  data-activates="#dropdown1">Dropdown
+                <a  class="dropdown-trigger" data-target="dropdown1">Cosas
                   <i class="material-icons right">arrow_drop_down</i>
                 </a>
-                <ul id="dropdown1" class="dropdown-content" tabindex="0">
-                  <li><a href="#">one</a></li>
-                  <li><a href="#">two</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">three</a></li>
-                </ul>
+                
               </li>
             </ul>
+            
+
           </div>
 
         </nav>
       </div>
 
       <ul class="sidenav" id="mobile-demo">
-        <li><a href="#">One Item</a></li>
-        <li><a href="#">One Item</a></li>
-        <li><a href="#">One Item</a></li>
-        <li>
-          <a href="#" class="dropdown-trigger"  data-target="dropdown1">Dropdown
-            <i class="material-icons right">arrow_drop_down</i>
-          </a>
-          <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#">one</a></li>
-            <li><a href="#">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#">three</a></li>
-          </ul>
+        <li><a href="./">Home</a></li>
+        <li><a href="./about">About</a></li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+              <li>
+                <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                  <ul>
+                    <li><a href="#!">First</a></li>
+                    <li><a href="#!">Second</a></li>
+                    <li><a href="#!">Third</a></li>
+                    <li><a href="#!">Fourth</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="#!">Second Sidebar Link</a></li>
+            </ul>
+        </li>
+        
+         
       </ul>
+<!--
+    <ul id="mobile-demo" class="sidenav">
+        <li><div class="user-view">
+          <div class="background">
+            
+          </div>
+          
+          <a href="#name"><span class="white-text name">John Doe</span></a>
+          <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+        </div></li>
+            <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+            <li><a href="#!">Second Link</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Subheader</a></li>
+            <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+-->
     <!--FINALIZA NAVBAR-->
     <div class="container">
     {% block content %}{% endblock %}
     </div>
-      <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
+      <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script type="text/javascript">
+        console.log(M)
+        var dropdowns = document.querySelectorAll('.dropdown-trigger')
+
+        for (var i = 0; i < dropdowns.length; i++){
+            M.Dropdown.init(dropdowns[i]);
+        }
+        console.log("aca1");
+        document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.sidenav');
+        var instances = M.Sidenav.init(elems);
+        var elems1 = document.querySelectorAll('.collapsible');
+        var instances1 = M.Collapsible.init(elems1,);
+      });
+
+        //    for (var i = 0; i < sidenavs.length; i++){
+        //        M.Sidenav.init(sidenavs[i]);
+        //}
+        console.log("aca2");
+    </script>
 </body>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
- 
+
 </html>
